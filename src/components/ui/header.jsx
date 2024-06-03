@@ -3,7 +3,8 @@ import React from 'react';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {AppColors} from '../../theme/Colors';
 import {height} from '../../utils/constants';
-import {SearchFavorite, SearchNormal1} from 'iconsax-react-native';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Header = () => {
   const insets = useSafeAreaInsets();
@@ -11,15 +12,16 @@ const Header = () => {
     <View
       style={{
         flexDirection: 'row',
-
         alignItems: 'center',
         backgroundColor: AppColors.BLACK,
-        // Paddings to handle safe area
         paddingTop: insets.top,
         paddingBottom: insets.bottom,
         paddingLeft: insets.left,
         paddingRight: insets.right,
       }}>
+      <View style={{position: 'absolute', left: 5}}>
+        <Ionicons name="menu" size={30} color={AppColors.WHITE} />
+      </View>
       <View
         style={{
           flex: 1,
@@ -33,11 +35,9 @@ const Header = () => {
             marginVertical: height * 0.03,
             resizeMode: 'contain',
           }}></Image>
-        <SearchNormal1
-          size={34}
-          color={AppColors.WHITE}
-          style={{position: 'absolute', right: 5}}
-        />
+        <View style={{position: 'absolute', right: 5}}>
+          <FontAwesome name="search" size={30} color={AppColors.WHITE} />
+        </View>
       </View>
     </View>
   );

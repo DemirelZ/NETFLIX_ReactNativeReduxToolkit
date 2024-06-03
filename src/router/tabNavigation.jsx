@@ -20,7 +20,7 @@ const TabNavigation = () => {
               size={size}
               focused={focused}
               color={color}
-              name={route?.name}
+              iconName={route?.name}
               route={route}
             />
           );

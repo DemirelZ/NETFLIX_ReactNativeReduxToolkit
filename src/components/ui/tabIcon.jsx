@@ -1,16 +1,16 @@
 import {StyleSheet, Text} from 'react-native';
 import React from 'react';
-
-import {Heart, Home2} from 'iconsax-react-native';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import Feather from 'react-native-vector-icons/Feather';
 import {FAVOURITES, HOME} from '../../utils/routes';
 
-const TabIcon = ({name, size, color, focused}) => {
+const TabIcon = ({iconName, size, color, focused}) => {
   size = 34;
 
-  if (name === HOME) {
-    return <Home2 size={focused ? size : 28} color={color} variant="Bold" />;
-  } else if (name === FAVOURITES) {
-    return <Heart size={focused ? size : 28} color={color} variant="Bold" />;
+  if (iconName === HOME) {
+    return <AntDesign name="home" size={focused ? size : 28} color={color} />;
+  } else if (iconName === FAVOURITES) {
+    return <Feather name="heart" size={focused ? size : 28} color={color} />;
   }
   return null; // Ekstra bir güvenlik için, eğer name eşleşmezse null döner
 };

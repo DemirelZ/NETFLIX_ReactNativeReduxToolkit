@@ -511,6 +511,9 @@ PODS:
     - React-RCTImage
   - RNSVG (15.3.0):
     - React-Core
+  - RNVectorIcons (10.1.0):
+    - RCT-Folly (= 2021.07.22.00)
+    - React-Core
   - SDWebImage (5.11.1):
     - SDWebImage/Core (= 5.11.1)
   - SDWebImage/Core (5.11.1)
@@ -590,6 +593,7 @@ DEPENDENCIES:
   - RNFastImage (from `../node_modules/react-native-fast-image`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
+  - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -700,6 +704,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-screens"
   RNSVG:
     :path: "../node_modules/react-native-svg"
+  RNVectorIcons:
+    :path: "../node_modules/react-native-vector-icons"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -760,6 +766,7 @@ SPEC CHECKSUMS:
   RNFastImage: 5c9c9fed9c076e521b3f509fe79e790418a544e8
   RNScreens: 93ae3be2f119d955620f9bbb39ad372adb53b7a9
   RNSVG: a48668fd382115bc89761ce291a81c4ca5f2fd2e
+  RNVectorIcons: bfb663f3f7b37340cd90120151b720641523dc84
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
