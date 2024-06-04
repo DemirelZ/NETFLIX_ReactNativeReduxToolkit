@@ -19,9 +19,6 @@ const Header = () => {
         paddingLeft: insets.left,
         paddingRight: insets.right,
       }}>
-      <View style={{position: 'absolute', left: 5}}>
-        <Ionicons name="menu" size={30} color={AppColors.WHITE} />
-      </View>
       <View
         style={{
           flex: 1,
@@ -35,8 +32,11 @@ const Header = () => {
             marginVertical: height * 0.03,
             resizeMode: 'contain',
           }}></Image>
+        <View style={{position: 'absolute', left: 5}}>
+          <Ionicons name="menu" size={34} color={AppColors.WHITE} />
+        </View>
         <View style={{position: 'absolute', right: 5}}>
-          <FontAwesome name="search" size={30} color={AppColors.WHITE} />
+          <FontAwesome name="search" size={28} color={AppColors.WHITE} />
         </View>
       </View>
     </View>

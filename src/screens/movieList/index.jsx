@@ -1,16 +1,15 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {screenStyles} from '../../styles/screenStyles';
-import Section from '../../components/ui/section';
 
-const Home = () => {
+const MovieList = () => {
   return (
     <View style={screenStyles.container}>
-      <Section />
+      <Text>MovieList</Text>
     </View>
   );
 };
 
-export default Home;
+export default MovieList;
 
 const styles = StyleSheet.create({});
