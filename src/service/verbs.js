@@ -1,7 +1,7 @@
 import Client from './instance';
 
 export const getRequest = async (URL, params) => {
-  const response = await Client.get(URL, {params: params});
+  const response = await Client.get(`${URL}`, {params: params});
   return response;
 };
 
