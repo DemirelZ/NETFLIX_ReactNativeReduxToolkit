@@ -1,5 +1,0 @@
-import {createAsyncThunk} from '@reduxjs/toolkit';
-
-const fetchMovies = createAsyncThunk('movies/fetchMovies', async () => {});
-
-export {fetchMovies};

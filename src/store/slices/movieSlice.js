@@ -1,10 +1,6 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {getRequest} from '../../service/verbs';
+import {createSlice} from '@reduxjs/toolkit';
 
-const fetchMovies = createAsyncThunk('movies/fetchMovies', async () => {
-  const response = await getRequest(UP_COMING_URL);
-  return response.data;
-});
+import {fetchMovies} from '../actions/movieActions';
 
 const initialState = {
   movies: [],
