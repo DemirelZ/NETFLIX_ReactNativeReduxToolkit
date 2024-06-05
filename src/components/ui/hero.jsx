@@ -1,6 +1,6 @@
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
-import {height} from '../../utils/constants';
+import {height, width} from '../../utils/constants';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchTrendingMovies} from '../../store/actions/movieActions';
 import TrendMovieCard from './trendMovieCard';
@@ -18,8 +18,12 @@ const Hero = () => {
       <FlatList
         data={trendingMovies}
         horizontal
+        showsHorizontalScrollIndicator={false}
         renderItem={({item}) => <TrendMovieCard item={item}></TrendMovieCard>}
         keyExtractor={item => item.id}
+        snapToAlignment={'start'}
+        decelerationRate={'fast'}
+        snapToInterval={width}
       />
     </View>
   );
@@ -28,8 +32,5 @@ const Hero = () => {
 export default Hero;
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'red',
-    height: height * 0.2,
-  },
+  container: {},
 });
