@@ -13,7 +13,7 @@ const Header = () => {
       style={{
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: AppColors.BLACK,
+        backgroundColor: AppColors.YELLOW,
         paddingTop: insets.top,
         paddingBottom: insets.bottom,
         paddingLeft: insets.left,
@@ -29,7 +29,7 @@ const Header = () => {
         <Image
           source={require('../../assets/images/logo.png')}
           style={{
-            marginVertical: height * 0.03,
+            marginVertical: height * 0.01,
             resizeMode: 'contain',
           }}></Image>
         <View style={{position: 'absolute', left: 5}}>
