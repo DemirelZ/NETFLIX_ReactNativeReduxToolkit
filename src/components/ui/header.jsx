@@ -1,7 +1,7 @@
 import {
   Image,
   StyleSheet,
-  Text,
+  Animated,
   TextInput,
   TouchableOpacity,
   View,
@@ -17,13 +17,41 @@ const Header = () => {
   const insets = useSafeAreaInsets();
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearch, setIsSearch] = useState(false);
+
+  const [opacityAnimation] = useState(new Animated.Value(0));
+
+  const searchBarVisibilty = () => {
+    setIsSearch(!isSearch);
+    Animated.timing(opacityAnimation, {
+      toValue: isSearch ? 0 : 1, // Hedef opaklık değeri (0 veya 1)
+      duration: 300, // Animasyon süresi (ms)
+      useNativeDriver: true, // Performans için native driver kullan
+    }).start(); // Animasyonu başlat
+  };
+
+  // const animatedStyle = {
+  //   opacity: opacityAnimation, // Opaklık değeri animasyonu
+  // };
+
+  const animatedStyle = {
+    opacity: opacityAnimation,
+    transform: [
+      {
+        translateY: opacityAnimation.interpolate({
+          inputRange: [0, 1],
+          outputRange: [-20, 0], // Görünürlük durumuna bağlı olarak -20'den 0'a animasyonlu bir yukarı kaydırma
+        }),
+      },
+    ],
+  };
+
   return (
     <View>
       <View
         style={{
           flexDirection: 'row',
           alignItems: 'center',
-          backgroundColor: AppColors.YELLOW,
+          backgroundColor: AppColors.BLACK,
           paddingTop: insets.top,
           paddingBottom: insets.bottom,
           paddingLeft: insets.left,
@@ -35,6 +63,7 @@ const Header = () => {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'center',
+            backgroundColor: AppColors.BLACK,
           }}>
           <Image
             source={require('../../assets/images/logo.png')}
@@ -46,21 +75,30 @@ const Header = () => {
             <Ionicons name="menu" size={34} color={AppColors.WHITE} />
           </View>
           <TouchableOpacity
-            onPress={() => setIsSearch(!isSearch)}
+            onPress={searchBarVisibilty}
             style={{position: 'absolute', right: 10}}>
-            <FontAwesome name="search" size={28} color={AppColors.WHITE} />
+            <Ionicons
+              name={isSearch ? 'search-circle' : 'search-circle-outline'}
+              size={42}
+              color={AppColors.WHITE}
+            />
           </TouchableOpacity>
         </View>
       </View>
 
-      {isSearch && (
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Search movie..."
-          value={searchTerm}
-          onChangeText={text => setSearchTerm(text)}
-        />
-      )}
+      <Animated.View
+        style={[{backgroundColor: AppColors.BLACK}, animatedStyle]}>
+        {isSearch && (
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Search movie..."
+            placeholderTextColor="white" // Place holder rengi
+            selectionColor="white" // Seçim rengi
+            value={searchTerm}
+            onChangeText={text => setSearchTerm(text)}
+          />
+        )}
+      </Animated.View>
     </View>
   );
 };
@@ -70,9 +108,12 @@ export default Header;
 const styles = StyleSheet.create({
   searchInput: {
     height: 40,
-    borderColor: '#ccc',
-    borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 10,
+    backgroundColor: AppColors.BLACK, // Arka plan rengi
+    color: 'white', // Metin rengi
+    borderWidth: 1,
+    borderColor: 'white', // Çerçeve rengi
+    fontSize: 20,
   },
 });
