@@ -1,6 +1,6 @@
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
-import {height, width} from '../../utils/constants';
+import {width} from '../../utils/constants';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchTrendingMovies} from '../../store/actions/movieActions';
 import TrendMovieCard from './trendMovieCard';

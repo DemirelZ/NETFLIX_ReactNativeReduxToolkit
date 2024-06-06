@@ -82,7 +82,11 @@ const TrendMovieCard = ({item}) => {
         </View>
         <View style={{flex: 1, alignItems: 'center'}}>
           <TouchableOpacity onPress={() => showDescription()}>
-            <InfoCircle size={30} color="white" />
+            <InfoCircle
+              size={30}
+              color="white"
+              variant={isOverView ? 'Bold' : 'Outline'}
+            />
             <Text style={{color: 'white'}}>info</Text>
           </TouchableOpacity>
         </View>

@@ -1,5 +1,5 @@
-import {StyleSheet, FlatList, View} from 'react-native';
-import React, {useEffect} from 'react';
+import {StyleSheet, FlatList, View, TextInput} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import {screenStyles} from '../../styles/screenStyles';
 import Section from '../../components/ui/section';
 import widgets from '../../widgets/widgets.json';
@@ -16,8 +16,8 @@ const Home = () => {
 
   return (
     <View style={screenStyles.container}>
-      <Hero />
       <FlatList
+        ListHeaderComponent={<Hero />}
         data={widgets}
         renderItem={({item}) => <Section item={item} />}
         keyExtractor={item => item.id}
