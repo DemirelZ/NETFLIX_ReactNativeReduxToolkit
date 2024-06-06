@@ -1,6 +1,11 @@
-import {createAsyncThunk} from '@reduxjs/toolkit';
+import {asyncThunkCreator, createAsyncThunk} from '@reduxjs/toolkit';
 import {getRequest} from '../../service/verbs';
-import {TRENDING_MOVIES, UP_COMING_URL} from '../../service/urls';
+import {
+  GENRES_URL,
+  MOVIESWITHGENRES_URL,
+  TRENDING_MOVIES,
+  UP_COMING_URL,
+} from '../../service/urls';
 
 const fetchMovies = createAsyncThunk('movies/fetchMovies', async () => {
   const response = await getRequest(UP_COMING_URL);
@@ -15,4 +20,18 @@ const fetchTrendingMovies = createAsyncThunk(
   },
 );
 
-export {fetchMovies, fetchTrendingMovies};
+//DENEME ÇALIŞMALARI
+const fetchGenres = createAsyncThunk('movies/fetchGenres', async () => {
+  const response = await getRequest(GENRES_URL);
+  return response.data;
+});
+
+const fetchMoviesWithGenres = createAsyncThunk(
+  'movies/fetchMoviesWithGenres',
+  async id => {
+    const response = await getRequest(`${MOVIESWITHGENRES_URL}${id}`);
+    return {genreId: id, movies: response.data};
+  },
+);
+
+export {fetchMovies, fetchTrendingMovies, fetchGenres, fetchMoviesWithGenres};

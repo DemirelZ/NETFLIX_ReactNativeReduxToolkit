@@ -1,3 +1,5 @@
+/*
+
 import {StyleSheet, FlatList, View, TextInput} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {screenStyles} from '../../styles/screenStyles';
@@ -21,6 +23,42 @@ const Home = () => {
         data={widgets}
         renderItem={({item}) => <Section item={item} />}
         keyExtractor={item => item.id}
+      />
+    </View>
+  );
+};
+
+export default Home;
+
+const styles = StyleSheet.create({});
+
+*/
+
+import {StyleSheet, FlatList, View} from 'react-native';
+import React, {useEffect} from 'react';
+import {screenStyles} from '../../styles/screenStyles';
+import Section from '../../components/ui/section';
+import {useDispatch, useSelector} from 'react-redux';
+import {fetchGenres} from '../../store/actions/movieActions';
+import Hero from '../../components/ui/hero';
+import Header from '../../components/ui/header';
+
+const Home = () => {
+  const {genres} = useSelector(state => state.movie);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchGenres());
+  }, []);
+
+  //console.log(genres);
+
+  return (
+    <View style={screenStyles.container}>
+      <FlatList
+        ListHeaderComponent={<Hero />}
+        data={genres}
+        renderItem={({item}) => <Section item={item} />}
       />
     </View>
   );

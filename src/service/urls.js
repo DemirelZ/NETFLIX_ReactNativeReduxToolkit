@@ -5,3 +5,6 @@ export const POPULAR_URL = '/movie/popular';
 export const TOP_RATED_URL = '/movie/top_rated';
 export const UP_COMING_URL = '/movie/upcoming';
 export const TRENDING_MOVIES = '/trending/movie/day';
+export const GENRES_URL = '/genre/movie/list?language=tr';
+export const MOVIESWITHGENRES_URL =
+  '/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=';

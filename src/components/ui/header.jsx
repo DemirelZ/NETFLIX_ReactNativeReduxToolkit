@@ -10,7 +10,6 @@ import React, {useState} from 'react';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {AppColors} from '../../theme/Colors';
 import {height} from '../../utils/constants';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Header = () => {
@@ -24,7 +23,7 @@ const Header = () => {
     setIsSearch(!isSearch);
     Animated.timing(opacityAnimation, {
       toValue: isSearch ? 0 : 1, // Hedef opaklık değeri (0 veya 1)
-      duration: 300, // Animasyon süresi (ms)
+      duration: 1000, // Animasyon süresi (ms)
       useNativeDriver: true, // Performans için native driver kullan
     }).start(); // Animasyonu başlat
   };
@@ -39,7 +38,7 @@ const Header = () => {
       {
         translateY: opacityAnimation.interpolate({
           inputRange: [0, 1],
-          outputRange: [-20, 0], // Görünürlük durumuna bağlı olarak -20'den 0'a animasyonlu bir yukarı kaydırma
+          outputRange: [0, 0], // Görünürlük durumuna bağlı olarak -20'den 0'a animasyonlu bir yukarı kaydırma
         }),
       },
     ],
@@ -92,8 +91,8 @@ const Header = () => {
           <TextInput
             style={styles.searchInput}
             placeholder="Search movie..."
-            placeholderTextColor="white" // Place holder rengi
-            selectionColor="white" // Seçim rengi
+            placeholderTextColor="white"
+            selectionColor="white"
             value={searchTerm}
             onChangeText={text => setSearchTerm(text)}
           />
