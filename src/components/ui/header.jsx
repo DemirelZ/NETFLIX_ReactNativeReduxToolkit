@@ -5,18 +5,21 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  Button,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {AppColors} from '../../theme/Colors';
 import {height} from '../../utils/constants';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {useDispatch} from 'react-redux';
+import {searchMovie} from '../../store/actions/movieActions';
 
 const Header = () => {
   const insets = useSafeAreaInsets();
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearch, setIsSearch] = useState(false);
-
+  const dispatch = useDispatch();
   const [opacityAnimation] = useState(new Animated.Value(0));
 
   const searchBarVisibilty = () => {
@@ -88,14 +91,20 @@ const Header = () => {
       <Animated.View
         style={[{backgroundColor: AppColors.BLACK}, animatedStyle]}>
         {isSearch && (
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Search movie..."
-            placeholderTextColor="white"
-            selectionColor="white"
-            value={searchTerm}
-            onChangeText={text => setSearchTerm(text)}
-          />
+          <>
+            <TextInput
+              style={styles.searchInput}
+              placeholder="Search movie..."
+              placeholderTextColor="white"
+              selectionColor="white"
+              value={searchTerm}
+              onChangeText={text => setSearchTerm(text)}
+            />
+            <Button
+              onPress={() => dispatch(searchMovie(searchTerm))}
+              title="search"
+            />
+          </>
         )}
       </Animated.View>
     </View>

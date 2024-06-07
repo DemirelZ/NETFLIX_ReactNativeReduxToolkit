@@ -41,14 +41,14 @@ import Section from '../../components/ui/section';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchGenres} from '../../store/actions/movieActions';
 import Hero from '../../components/ui/hero';
-import Header from '../../components/ui/header';
 
 const Home = () => {
-  const {genres} = useSelector(state => state.movie);
+  const {genres, searchResult} = useSelector(state => state.movie);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchGenres());
+    console.log(searchResult);
   }, []);
 
   //console.log(genres);

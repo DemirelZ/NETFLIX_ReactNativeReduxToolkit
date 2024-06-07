@@ -1,19 +1,29 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {useState} from 'react';
 import FastImage from 'react-native-fast-image';
 import {IMAGE_BASE_URL} from '../../service/urls';
 import {height, width} from '../../utils/constants';
 import {Add, InfoCircle, Play} from 'iconsax-react-native';
+import {useNavigation} from '@react-navigation/native';
+import {MOVIE_DETAIL} from '../../utils/routes';
 
 const TrendMovieCard = ({item}) => {
   const [isOverView, setIsOverView] = useState(false);
+  const navigation = useNavigation();
 
   const showDescription = () => {
     setIsOverView(!isOverView);
   };
 
   return (
-    <View
+    <Pressable
+      onPress={() => navigation.navigate(MOVIE_DETAIL, {movieID: item.id})}
       style={{
         width: width,
         height: height * 0.25,
@@ -91,7 +101,7 @@ const TrendMovieCard = ({item}) => {
           </TouchableOpacity>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 

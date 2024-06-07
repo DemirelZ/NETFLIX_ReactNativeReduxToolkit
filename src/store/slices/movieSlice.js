@@ -2,15 +2,19 @@ import {createSlice} from '@reduxjs/toolkit';
 
 import {
   fetchGenres,
+  fetchMovieDetail,
   fetchMovies,
   fetchMoviesWithGenres,
   fetchTrendingMovies,
+  searchMovie,
 } from '../actions/movieActions';
 
 const initialState = {
   movies: [],
+  movieDetail: {},
   moviesByGenre: {},
   trendingMovies: [],
+  searchResult: [],
   genres: [],
   status: null,
   error: null,
@@ -19,7 +23,11 @@ const initialState = {
 export const movieSlice = createSlice({
   name: 'movies',
   initialState,
-  reducers: {},
+  reducers: {
+    clearMovieDetail: state => {
+      state.movieDetail = {};
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(fetchMovies.pending, state => {
@@ -61,8 +69,34 @@ export const movieSlice = createSlice({
       .addCase(fetchMoviesWithGenres.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
+      })
+      //Movie Detail
+      .addCase(fetchMovieDetail.pending, state => {
+        state.status = true;
+      })
+      .addCase(fetchMovieDetail.fulfilled, (state, action) => {
+        state.status = false;
+        state.movieDetail = action.payload;
+      })
+      .addCase(fetchMovieDetail.rejected, (state, action) => {
+        state.status = false;
+        state.error = action.error.message;
+      })
+      // Search Movie
+      .addCase(searchMovie.pending, state => {
+        state.status = 'loading'; // Updated to string value
+      })
+      .addCase(searchMovie.fulfilled, (state, action) => {
+        state.status = 'succeeded'; // Updated to string value
+        state.searchResult = action.payload.results;
+      })
+      .addCase(searchMovie.rejected, (state, action) => {
+        state.status = 'failed'; // Updated to string value
+        state.error = action.payload.error; // Changed to use payload.error
       });
   },
 });
+
+export const {clearMovieDetail} = movieSlice.actions;
 
 export default movieSlice.reducer;

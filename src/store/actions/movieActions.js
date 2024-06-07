@@ -3,6 +3,7 @@ import {getRequest} from '../../service/verbs';
 import {
   GENRES_URL,
   MOVIESWITHGENRES_URL,
+  SEARCH_URL,
   TRENDING_MOVIES,
   UP_COMING_URL,
 } from '../../service/urls';
@@ -16,6 +17,14 @@ const fetchTrendingMovies = createAsyncThunk(
   'movies/fetchTrendingMovies',
   async () => {
     const response = await getRequest(TRENDING_MOVIES);
+    return response.data;
+  },
+);
+
+const fetchMovieDetail = createAsyncThunk(
+  'movie/fetchMovieDetail',
+  async movie_id => {
+    const response = await getRequest(`/movie/${movie_id}`);
     return response.data;
   },
 );
@@ -34,4 +43,21 @@ const fetchMoviesWithGenres = createAsyncThunk(
   },
 );
 
-export {fetchMovies, fetchTrendingMovies, fetchGenres, fetchMoviesWithGenres};
+const searchMovie = createAsyncThunk('movies/searchMovie', async searchItem => {
+  try {
+    const response = await getRequest(`${SEARCH_URL}${searchItem}`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue({error: error.message});
+  }
+});
+
+export {
+  fetchMovies,
+  fetchTrendingMovies,
+  fetchGenres,
+  fetchMoviesWithGenres,
+  fetchMovieDetail,
+  searchMovie,
+};

@@ -1,13 +1,18 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import FastImage from 'react-native-fast-image';
 import {IMAGE_BASE_URL} from '../../service/urls';
 import {AuthorizationBearerKey, height, width} from '../../utils/constants';
+import {useNavigation} from '@react-navigation/native';
+import {MOVIE_DETAIL} from '../../utils/routes';
 
 const MovieCard = ({movie}) => {
   //console.log(movie);
+  const navigation = useNavigation();
   return (
-    <View style={styles.container}>
+    <Pressable
+      onPress={() => navigation.navigate(MOVIE_DETAIL, {movieID: movie.id})}
+      style={styles.container}>
       <FastImage
         style={{width: width * 0.35, height: height * 0.25}}
         source={{
@@ -19,7 +24,7 @@ const MovieCard = ({movie}) => {
         resizeMode={FastImage.resizeMode.contain}
       />
       <Text style={{color: 'white', textAlign: 'center'}}>{movie.title}</Text>
-    </View>
+    </Pressable>
   );
 };
 
