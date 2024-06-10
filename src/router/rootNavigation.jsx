@@ -5,7 +5,7 @@ import {MOVIELIST, MOVIE_DETAIL, TAB} from '../utils/routes';
 import TabNavigation from './tabNavigation';
 import MovieList from '../screens/movieList';
 import Header from '../components/ui/header';
-import MovieDetail from '../components/ui/movieDetail';
+import MovieDetail from '../screens/movieList/movieDetail';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,6 +28,10 @@ const RootNavigation = () => {
       <Stack.Screen
         options={{
           headerBackTitle: 'Back',
+
+          headerStyle: {
+            backgroundColor: 'black',
+          },
         }}
         name={MOVIE_DETAIL}
         component={MovieDetail}

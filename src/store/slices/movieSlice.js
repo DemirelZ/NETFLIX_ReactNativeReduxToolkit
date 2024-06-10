@@ -6,11 +6,13 @@ import {
   fetchMovies,
   fetchMoviesWithGenres,
   fetchTrendingMovies,
+  removeDetailData,
   searchMovie,
 } from '../actions/movieActions';
 
 const initialState = {
   movies: [],
+  //removeDetailData: {},
   movieDetail: {},
   moviesByGenre: {},
   trendingMovies: [],
@@ -93,6 +95,10 @@ export const movieSlice = createSlice({
       .addCase(searchMovie.rejected, (state, action) => {
         state.status = 'failed'; // Updated to string value
         state.error = action.payload.error; // Changed to use payload.error
+      })
+      // Remove Detail Data
+      .addCase(removeDetailData.fulfilled, (state, action) => {
+        state.movieDetail = action.payload;
       });
   },
 });

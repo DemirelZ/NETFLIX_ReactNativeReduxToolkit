@@ -100,10 +100,10 @@ const Header = () => {
               value={searchTerm}
               onChangeText={text => setSearchTerm(text)}
             />
-            <Button
+            {/* <Button
               onPress={() => dispatch(searchMovie(searchTerm))}
               title="search"
-            />
+            /> */}
           </>
         )}
       </Animated.View>

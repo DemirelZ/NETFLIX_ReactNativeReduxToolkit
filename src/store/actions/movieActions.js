@@ -53,6 +53,13 @@ const searchMovie = createAsyncThunk('movies/searchMovie', async searchItem => {
   }
 });
 
+const removeDetailData = createAsyncThunk(
+  'movies/removeDetailData',
+  async () => {
+    return null;
+  },
+);
+
 export {
   fetchMovies,
   fetchTrendingMovies,
@@ -60,4 +67,5 @@ export {
   fetchMoviesWithGenres,
   fetchMovieDetail,
   searchMovie,
+  removeDetailData,
 };

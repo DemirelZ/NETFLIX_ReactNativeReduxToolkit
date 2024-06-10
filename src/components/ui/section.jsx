@@ -8,6 +8,7 @@ import {fetchMoviesWithGenres} from '../../store/actions/movieActions';
 const Section = props => {
   const dispatch = useDispatch();
   const {item} = props;
+  //console.log(item);
   const moviesByGenre = useSelector(state => state.movie.moviesByGenre);
   //const movies = moviesByGenre[item.id] || [];
 
@@ -24,7 +25,7 @@ const Section = props => {
 
   return (
     <View style={{marginVertical: 10}}>
-      <SectionHeader title={item.name} />
+      <SectionHeader title={item.name} genre={item} />
       <FlatList
         data={movies}
         horizontal

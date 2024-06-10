@@ -4,9 +4,13 @@ import {AppColors} from '../../theme/Colors';
 import {useNavigation} from '@react-navigation/native';
 import {MOVIELIST} from '../../utils/routes';
 
-const SectionHeader = props => {
-  const {title} = props;
+const SectionHeader = ({title, genre}) => {
   const navigation = useNavigation();
+
+  const handlePress = () => {
+    navigation.navigate(MOVIELIST, {genre});
+  };
+
   return (
     <View
       style={{
@@ -15,7 +19,7 @@ const SectionHeader = props => {
         alignItems: 'center',
       }}>
       <Text style={styles.title}>{title}</Text>
-      <TouchableOpacity onPress={() => navigation.navigate(MOVIELIST)}>
+      <TouchableOpacity onPress={handlePress}>
         <Text style={[styles.title, styles.seeAll]}>See All</Text>
       </TouchableOpacity>
     </View>
