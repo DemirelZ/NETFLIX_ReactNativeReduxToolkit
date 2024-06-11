@@ -9,3 +9,6 @@ export const GENRES_URL = '/genre/movie/list?language=tr';
 export const SEARCH_URL = '/search/movie?query=';
 export const MOVIESWITHGENRES_URL =
   '/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=';
+export const FAVOURITE_URL = '/favorite';
+export const ACCOUNT_URL = '/account/';
+export const FAV_MOVIES_URL = '/movies';

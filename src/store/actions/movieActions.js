@@ -1,4 +1,4 @@
-import {asyncThunkCreator, createAsyncThunk} from '@reduxjs/toolkit';
+import {createAsyncThunk} from '@reduxjs/toolkit';
 import {getRequest} from '../../service/verbs';
 import {
   GENRES_URL,

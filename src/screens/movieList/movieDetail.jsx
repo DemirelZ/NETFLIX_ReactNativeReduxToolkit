@@ -1,4 +1,12 @@
-import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  Alert,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {useEffect} from 'react';
 import {screenStyles} from '../../styles/screenStyles';
 import {useDispatch, useSelector} from 'react-redux';
@@ -9,8 +17,9 @@ import {
 import {AuthorizationBearerKey, height, width} from '../../utils/constants';
 import {IMAGE_BASE_URL} from '../../service/urls';
 import Loading from '../../components/ui/Loading';
-import {clearMovieDetail} from '../../store/slices/movieSlice';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import {AppColors} from '../../theme/Colors';
+import {addFavouriteMovie} from '../../store/actions/favouriteActions';
 
 const MovieDetail = ({route}) => {
   const {movieID} = route?.params;
@@ -18,7 +27,6 @@ const MovieDetail = ({route}) => {
   const dispatch = useDispatch();
   const {movieDetail, status} = useSelector(state => state.movie);
   //console.log(movieDetail);
-  useEffect(() => {}, []);
 
   useEffect(() => {
     dispatch(fetchMovieDetail(movieID));
@@ -27,6 +35,16 @@ const MovieDetail = ({route}) => {
       dispatch(removeDetailData());
     };
   }, [movieID, dispatch]);
+
+  const handleAddFavourite = id => {
+    const fav = {
+      media_id: id,
+      media_type: 'movie',
+      favorite: true,
+    };
+
+    dispatch(addFavouriteMovie(fav));
+  };
 
   return (
     <>
@@ -53,6 +71,11 @@ const MovieDetail = ({route}) => {
                   uri: `${IMAGE_BASE_URL}${movieDetail?.backdrop_path}`,
                   headers: {Authorization: `Bearer ${AuthorizationBearerKey}`},
                 }}></Image>
+              <TouchableOpacity
+                onPress={() => handleAddFavourite(movieID)}
+                style={{position: 'absolute', left: 10, top: 10}}>
+                <Ionicons name={'heart'} size={36} color={AppColors.WHITE} />
+              </TouchableOpacity>
               <View
                 style={{
                   position: 'absolute',
