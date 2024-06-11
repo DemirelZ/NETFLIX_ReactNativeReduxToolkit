@@ -5,7 +5,7 @@ import {
 } from '../actions/favouriteActions';
 
 const initialState = {
-  favourites: [],
+  favourites: null,
   loading: false,
   error: false,
 };
@@ -31,8 +31,7 @@ const FavouriteSlice = createSlice({
         // state.loading = true;
       })
       .addCase(fetchFavouriteMovie.fulfilled, (state, action) => {
-        (state.loading = false),
-          (state.favourites = [...state.favourites, action.payload]);
+        (state.loading = false), (state.favourites = action.payload);
       })
       .addCase(fetchFavouriteMovie.rejected, (state, action) => {
         (state.loading = false), (state.error = true);

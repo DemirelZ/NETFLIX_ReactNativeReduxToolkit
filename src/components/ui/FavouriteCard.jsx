@@ -16,16 +16,14 @@ const FavouriteCard = ({movie}) => {
       <FastImage
         style={{width: width * 0.35, height: height * 0.25}}
         source={{
-          uri: `${IMAGE_BASE_URL}${movie[1]?.poster_path}`,
+          uri: `${IMAGE_BASE_URL}${movie?.poster_path}`,
           headers: {Authorization: `Bearer ${AuthorizationBearerKey}`},
           priority: FastImage.priority.normal,
           cache: FastImage.cacheControl.immutable,
         }}
         resizeMode={FastImage.resizeMode.contain}
       />
-      <Text style={{color: 'white', textAlign: 'center'}}>
-        {movie[1]?.title}
-      </Text>
+      <Text style={{color: 'white', textAlign: 'center'}}>{movie?.title}</Text>
     </Pressable>
   );
 };
