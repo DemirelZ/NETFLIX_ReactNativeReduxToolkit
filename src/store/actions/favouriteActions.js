@@ -14,6 +14,17 @@ const addFavouriteMovie = createAsyncThunk(
   },
 );
 
+const deleteFavouriteMovie = createAsyncThunk(
+  'favourites/deleteFavouriteMovie',
+  async FavMovie => {
+    const response = await postRequest(
+      `${ACCOUNT_URL}${ACCOUNT_ID}${FAVOURITE_URL}`,
+      FavMovie,
+    );
+    return response.data;
+  },
+);
+
 const fetchFavouriteMovie = createAsyncThunk(
   'favourites/fetchFavouriteMovie',
   async () => {
@@ -24,4 +35,4 @@ const fetchFavouriteMovie = createAsyncThunk(
   },
 );
 
-export {addFavouriteMovie, fetchFavouriteMovie};
+export {addFavouriteMovie, fetchFavouriteMovie, deleteFavouriteMovie};

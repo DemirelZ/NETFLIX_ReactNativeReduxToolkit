@@ -1,6 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {
   addFavouriteMovie,
+  deleteFavouriteMovie,
   fetchFavouriteMovie,
 } from '../actions/favouriteActions';
 
@@ -34,6 +35,17 @@ const FavouriteSlice = createSlice({
         (state.loading = false), (state.favourites = action.payload);
       })
       .addCase(fetchFavouriteMovie.rejected, (state, action) => {
+        (state.loading = false), (state.error = true);
+      })
+      //deleteFav Movie
+      .addCase(deleteFavouriteMovie.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(deleteFavouriteMovie.fulfilled, (state, action) => {
+        state.loading = false;
+        //(state.favourites = [...state.favourites, action.payload]);
+      })
+      .addCase(deleteFavouriteMovie.rejected, (state, action) => {
         (state.loading = false), (state.error = true);
       });
   },
