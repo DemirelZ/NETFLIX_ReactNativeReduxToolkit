@@ -11,16 +11,21 @@ import React, {useEffect, useState} from 'react';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {AppColors} from '../../theme/Colors';
 import {height} from '../../utils/constants';
+import Fontisto from 'react-native-vector-icons/Fontisto';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useDispatch} from 'react-redux';
 import {searchMovie} from '../../store/actions/movieActions';
+import {useNavigation} from '@react-navigation/native';
+import {NOTIFICATION} from '../../utils/routes';
 
-const Header = () => {
+const Header = props => {
+  const name = props?.route?.name;
   const insets = useSafeAreaInsets();
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearch, setIsSearch] = useState(false);
   const dispatch = useDispatch();
   const [opacityAnimation] = useState(new Animated.Value(0));
+  const navigation = useNavigation();
 
   const searchBarVisibilty = () => {
     setIsSearch(!isSearch);
@@ -73,9 +78,18 @@ const Header = () => {
               marginVertical: height * 0.01,
               resizeMode: 'contain',
             }}></Image>
-          <View style={{position: 'absolute', left: 5}}>
-            <Ionicons name="menu" size={34} color={AppColors.WHITE} />
-          </View>
+          {name ? (
+            <TouchableOpacity
+              onPress={() => navigation.goBack()}
+              style={{position: 'absolute', left: 5}}>
+              <Ionicons name="arrow-back" size={34} color={AppColors.WHITE} />
+            </TouchableOpacity>
+          ) : (
+            <View style={{position: 'absolute', left: 5}}>
+              <Ionicons name="menu" size={34} color={AppColors.WHITE} />
+            </View>
+          )}
+
           <TouchableOpacity
             onPress={searchBarVisibilty}
             style={{position: 'absolute', right: 10}}>
@@ -84,6 +98,11 @@ const Header = () => {
               size={42}
               color={AppColors.WHITE}
             />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate(NOTIFICATION)}
+            style={{position: 'absolute', right: 55}}>
+            <Fontisto name={'bell'} size={32} color={AppColors.WHITE} />
           </TouchableOpacity>
         </View>
       </View>
