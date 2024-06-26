@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import FastImage from 'react-native-fast-image';
 import {IMAGE_BASE_URL} from '../../service/urls';
 import {AuthorizationBearerKey, height, width} from '../../utils/constants';
@@ -13,7 +13,10 @@ import {useNavigation} from '@react-navigation/native';
 import {MOVIE_DETAIL} from '../../utils/routes';
 import Feather from 'react-native-vector-icons/Feather';
 import {AppColors} from '../../theme/Colors';
-import {deleteFavouriteMovie} from '../../store/actions/favouriteActions';
+import {
+  deleteFavouriteMovie,
+  fetchFavouriteMovie,
+} from '../../store/actions/favouriteActions';
 import {useDispatch} from 'react-redux';
 
 const FavouriteCard = ({movie}) => {
@@ -23,7 +26,7 @@ const FavouriteCard = ({movie}) => {
 
   const handleDeleteFavourite = id => {
     const fav = {
-      media_id: movie.id,
+      media_id: id,
       media_type: 'movie',
       favorite: false,
     };
@@ -45,8 +48,12 @@ const FavouriteCard = ({movie}) => {
         }}
         resizeMode={FastImage.resizeMode.contain}
       />
-      <Text style={{color: 'white', textAlign: 'center'}}>{movie?.title}</Text>
-      <TouchableOpacity onPress={() => handleDeleteFavourite(movie.id)}>
+      <Text style={{color: 'white', textAlign: 'center', fontSize: 20}}>
+        {movie?.title}
+      </Text>
+      <TouchableOpacity
+        onPress={() => handleDeleteFavourite(movie.id)}
+        style={{position: 'absolute', top: 2, right: 2}}>
         <Feather name="x-circle" size={34} color={AppColors.WHITE} />
       </TouchableOpacity>
     </Pressable>

@@ -5,12 +5,9 @@ import {useDispatch, useSelector} from 'react-redux';
 import MovieCard from './movieCard';
 import {fetchMoviesWithGenres} from '../../store/actions/movieActions';
 
-const Section = props => {
+const Section = React.memo(({item}) => {
   const dispatch = useDispatch();
-  const {item} = props;
-  //console.log(item);
   const moviesByGenre = useSelector(state => state.movie.moviesByGenre);
-  //const movies = moviesByGenre[item.id] || [];
 
   const movies = useMemo(
     () => moviesByGenre[item.id] || [],
@@ -34,7 +31,7 @@ const Section = props => {
       />
     </View>
   );
-};
+});
 
 export default Section;
 

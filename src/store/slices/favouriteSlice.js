@@ -43,7 +43,10 @@ const FavouriteSlice = createSlice({
       })
       .addCase(deleteFavouriteMovie.fulfilled, (state, action) => {
         state.loading = false;
-        //(state.favourites = [...state.favourites, action.payload]);
+        const newFavourites = state.favourites.filter(
+          item => item.id !== action.payload,
+        );
+        state.favourites = newFavourites;
       })
       .addCase(deleteFavouriteMovie.rejected, (state, action) => {
         (state.loading = false), (state.error = true);

@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {screenStyles} from '../../styles/screenStyles';
 import {useDispatch, useSelector} from 'react-redux';
 import {
@@ -23,18 +23,26 @@ import {addFavouriteMovie} from '../../store/actions/favouriteActions';
 
 const MovieDetail = ({route}) => {
   const {movieID} = route?.params;
-  //console.log(movieID);
   const dispatch = useDispatch();
   const {movieDetail, status} = useSelector(state => state.movie);
-  //console.log(movieDetail);
+  const {favourites} = useSelector(state => state.favourites);
+
+  const [isFavourite, setIsFavourite] = useState(false);
 
   useEffect(() => {
     dispatch(fetchMovieDetail(movieID));
 
+    // Check if the movie is already in favourites
+    if (favourites?.some(fav => fav.id === movieID)) {
+      setIsFavourite(true);
+    } else {
+      setIsFavourite(false);
+    }
+
     return () => {
       dispatch(removeDetailData());
     };
-  }, [movieID, dispatch]);
+  }, [movieID, dispatch, favourites]);
 
   const handleAddFavourite = id => {
     const fav = {
@@ -44,6 +52,10 @@ const MovieDetail = ({route}) => {
     };
 
     dispatch(addFavouriteMovie(fav));
+    setIsFavourite(true);
+    Alert.alert(
+      'The movie has been successfully added to list of favorite movies.',
+    );
   };
 
   return (
@@ -74,7 +86,11 @@ const MovieDetail = ({route}) => {
               <TouchableOpacity
                 onPress={() => handleAddFavourite(movieID)}
                 style={{position: 'absolute', left: 10, top: 10}}>
-                <Ionicons name={'heart'} size={36} color={AppColors.WHITE} />
+                <Ionicons
+                  name={'heart'}
+                  size={36}
+                  color={isFavourite ? 'red' : AppColors.WHITE}
+                />
               </TouchableOpacity>
               <View
                 style={{
@@ -83,7 +99,6 @@ const MovieDetail = ({route}) => {
                   right: 5,
                   flexDirection: 'row',
                   backgroundColor: '#f5c517',
-
                   width: 100,
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -103,7 +118,6 @@ const MovieDetail = ({route}) => {
                     color: 'white',
                     paddingVertical: 5,
                     fontSize: 20,
-
                     fontWeight: 'bold',
                   }}>
                   {movieDetail?.vote_average?.toFixed(1)}

@@ -58,12 +58,14 @@ const Home = () => {
       <FlatList
         ListHeaderComponent={<Hero />}
         data={genres}
-        renderItem={({item}) => <Section item={item} />}
+        renderItem={({item}) => <MemoizedSection item={item} />}
       />
     </View>
   );
 };
 
 export default Home;
+
+const MemoizedSection = React.memo(Section);
 
 const styles = StyleSheet.create({});

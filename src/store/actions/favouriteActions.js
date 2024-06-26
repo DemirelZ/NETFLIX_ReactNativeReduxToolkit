@@ -21,7 +21,8 @@ const deleteFavouriteMovie = createAsyncThunk(
       `${ACCOUNT_URL}${ACCOUNT_ID}${FAVOURITE_URL}`,
       FavMovie,
     );
-    return response.data;
+    // console.log('response.data', FavMovie.media_id);
+    return FavMovie.media_id;
   },
 );
 
