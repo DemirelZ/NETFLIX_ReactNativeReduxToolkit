@@ -8,9 +8,7 @@ import {store} from './src/store';
 
 const App = () => {
   useEffect(() => {
-    setTimeout(() => {
-      SplashScreen.hide();
-    }, 2000);
+    SplashScreen.hide();
   }, []);
 
   return (
