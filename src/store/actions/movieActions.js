@@ -29,7 +29,6 @@ const fetchMovieDetail = createAsyncThunk(
   },
 );
 
-//DENEME ÇALIŞMALARI
 const fetchGenres = createAsyncThunk('movies/fetchGenres', async () => {
   const response = await getRequest(GENRES_URL);
   return response.data;
