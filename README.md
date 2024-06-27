@@ -1,8 +1,8 @@
 # NETFLIX Clone React-Native
 
-This project is developed using React Native and REDUX/Toolkit.
+React Native and REDUX/Toolkit were used to develop this project.
 <br/>
-<br/> This application provides information about movies detail and movie categories
+<br/> This application provides information about film details and film categories.
 <br/>
 
 ## Used Technologies:
@@ -17,6 +17,10 @@ This project is developed using React Native and REDUX/Toolkit.
 - Axios
 - React-Native-Animatable
 - vector icons
+
+### API:
+
+https://www.themoviedb.org/
 
 <h2> Find the screen gif below </h2>
 
